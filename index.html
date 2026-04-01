@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cab Service in Manipal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    background: url('bg.jpg') no-repeat center center;
+    background-size: cover;
+    padding-bottom: 70px;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(45deg,#0d6efd,#00c6ff);
+}
+
+/* FORM */
+.container {
+    margin: 20px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.7);
+}
+
+.input-box {
+    margin: 15px 0;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    color: white;
+}
+
+.call-btn {
+    background: linear-gradient(45deg,#00ff7f,#00c853);
+}
+
+.tagline {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.version {
+    text-align:center;
+    font-size:12px;
+    color:#ccc;
+    margin-top:15px;
+}
+
+/* BOTTOM MENU */
+.bottom-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+}
+
+.bottom-bar a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+}
+
+.bottom-bar a:hover{
+    color:#00c6ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="logo.png" width="90">
+    <h1>Shree Devi Travels Manipal</h1>
+    <p class="tagline">Your Journey, Our Responsibility</p>
+    <p>📞 +91 63626 35718 | +91 70198 49902</p>
+</header>
+
+<div class="container">
+
+<h2>🚗 Book Your Ride</h2>
+
+<div class="input-box">
+<input type="text" id="name" placeholder="👤 Full Name">
+</div>
+
+<div class="input-box">
+<input type="tel" id="phone" placeholder="📞 Phone Number">
+</div>
+
+<div class="input-box">
+<input type="text" id="pickup" placeholder="📍 Pickup Location">
+</div>
+
+<div class="input-box">
+<input type="text" id="drop" placeholder="🏁 Drop Location">
+</div>
+
+<div class="input-box">
+<input type="date" id="date">
+</div>
+
+<div class="input-box">
+<input type="time" id="time">
+</div>
+
+<div class="input-box">
+<input type="number" id="persons" placeholder="👥 Passengers">
+</div>
+
+<button onclick="book()">🚀 Book via WhatsApp</button>
+<button class="call-btn" onclick="callNow()">📲 Call Now</button>
+
+<div class="version">Version 3.0</div>
+
+</div>
+
+<!-- BOTTOM MENU -->
+<div class="bottom-bar">
+    <a href="index.html">🏠<br>Home</a>
+    <a href="history.html">📄<br>History</a>
+    <a href="#" onclick="callNow()">📞<br>Call</a>
+</div>
+
+<script>
+
+function book(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let pickup=document.getElementById("pickup").value;
+let drop=document.getElementById("drop").value;
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
+let persons=document.getElementById("persons").value;
+
+if(name==""||phone==""||pickup==""||drop==""||date==""||time==""||persons==""){
+alert("Fill all details ❗");
+return;
+}
+
+// SAVE HISTORY
+let booking = {name, phone, pickup, drop, date, time, persons};
+let allBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+allBookings.push(booking);
+localStorage.setItem("bookings", JSON.stringify(allBookings));
+
+// WHATSAPP
+let msg=`🚗 Booking Request
+
+Name: ${name}
+Phone: ${phone}
+From: ${pickup}
+To: ${drop}
+Date: ${date}
+Time: ${time}
+Passengers: ${persons}`;
+
+window.open("https://wa.me/916362635718?text="+encodeURIComponent(msg));
+}
+
+function callNow(){
+window.open("tel:6362635718");
+}
+
+</script>
+
+</body>
+</html>
